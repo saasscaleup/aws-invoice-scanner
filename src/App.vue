@@ -61,7 +61,7 @@ async function processInvoiceWithAPI(file) {
     reader.readAsDataURL(file)
   })
 
-  const response = await fetch('https://6zj5jxcstb5m7q2wr4izfcv54m0cbonf.lambda-url.us-east-1.on.aws/', {
+  const response = await fetch('<aws-lambda-url>', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
