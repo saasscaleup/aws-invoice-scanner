@@ -14,7 +14,7 @@ bedrock = boto3.client("bedrock-runtime", region_name=BEDROCK_REGION)
 # Claude 3.7 Sonnet model on Bedrock
 INFERENCE_PROFILE_ARN = os.environ.get(
     "BEDROCK_INFERENCE_PROFILE_ARN",
-    "arn:aws:bedrock:us-east-1:247323793332:inference-profile/us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+    "arn:aws:bedrock:us-east-1:<account-id>:inference-profile/us.anthropic.claude-3-7-sonnet-20250219-v1:0"
 )
 
 def call_bedrock_claude(image_base64: str, media_type: str = "image/png") -> dict:
@@ -75,7 +75,7 @@ def call_bedrock_claude(image_base64: str, media_type: str = "image/png") -> dic
     )
 
     response_body = json.loads(response["body"].read())
-    # Claude messages API returns text in content[0].text  [oai_citation:1‡hidekazu-konishi.com](https://hidekazu-konishi.com/entry/amazon_bedrock_claude_3-5_sonnet_vision_automate_titan_image_gen.html)
+    # Claude messages API returns text in content[0].text
     raw_text = response_body["content"][0]["text"].strip()
 
     try:
