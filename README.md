@@ -1,35 +1,32 @@
-Here’s a README.md you can drop straight into that branch 👇
-(You can tweak the backend URL bits once you finalize the Lambda.)
+# AWS Invoice Scanner — Step 1 (Frontend)
 
-⸻
+AI-powered invoice scanner UI built with Vue 3 and Vite.  
+In this step, you build the frontend that uploads an invoice image and sends it to an AWS backend (Lambda + Bedrock Claude) for extraction.
 
-
-# AWS Invoice Scanner (Step 1 – Frontend)
-
-AI-powered invoice scanner UI built with **Vue 3 + Vite**.  
-This step focuses on the frontend that lets you upload an invoice image and send it to a backend (AWS Lambda + Bedrock Claude) for extraction.
-
-> This is **Step 1** of the series – frontend only. The AWS backend (Lambda / Bedrock) is wired in later steps.
+> This is Step 1 of the full serverless project.  
+> The AWS backend integration is added in later steps.
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
-- [Vue 3](https://vuejs.org/)
-- [Vite](https://vitejs.dev/)
-- JavaScript / TypeScript-ready
-
----
-
-## ✅ Prerequisites
-
-- **Node.js** 18+ (20+ recommended)
-- **npm** (comes with Node) or **pnpm/yarn** if you prefer
-- Git (to clone the repo)
+- Vue 3
+- Vite
+- JavaScript (TypeScript-ready)
 
 ---
 
-## 🚀 Getting Started
+## Prerequisites
+
+Make sure you have:
+
+- Node.js 18+ (20+ recommended)
+- npm, pnpm, or yarn
+- Git
+
+---
+
+## Getting Started
 
 ### 1. Clone the repository
 
@@ -37,87 +34,130 @@ This step focuses on the frontend that lets you upload an invoice image and send
 git clone https://github.com/saasscaleup/aws-invoice-scanner.git
 cd aws-invoice-scanner
 git checkout ais-step-1
+```
 
-2. Install dependencies
+### 2. Install dependencies
 
 Using npm:
 
+```bash
 npm install
+```
 
-(or)
+Or using pnpm:
 
-Using pnpm:
-
+```bash
 pnpm install
+```
 
+---
 
-⸻
-
-🏃‍♂️ Run the Dev Server
+## Running the Development Server
 
 Start the Vite dev server:
 
+```bash
 npm run dev
+```
 
-You’ll see output similar to:
+You should see output similar to:
 
-  VITE vX.X.X  ready in Xs
+```text
+VITE vX.X.X  ready in Xs
+➜  Local:   http://localhost:5173/
+➜  Network: http://192.168.x.x:5173/
+```
 
-  ➜  Local:   http://localhost:5173/
-  ➜  Network: http://192.168.x.x:5173/
+Open the local URL (usually `http://localhost:5173/`) in your browser.
 
-Open the Local URL in your browser (usually http://localhost:5173).
+---
 
-⸻
+## Building for Production
 
-🏗️ Build for Production
+Create an optimized production build:
 
-To create an optimized production build:
-
+```bash
 npm run build
+```
 
-This outputs static assets into the dist/ directory.
+This generates static files in the `dist/` folder.
 
-You can preview the production build locally with:
+Preview the production build locally:
 
+```bash
 npm run preview
+```
 
+---
 
-⸻
+## Connecting to the AWS Backend (Later Steps)
 
-🔌 Connecting to Your AWS Backend (Lambda + Bedrock)
+This frontend is designed to send invoice images to an AWS Lambda Function URL that:
 
-In later steps of the project, this frontend will call an AWS Lambda Function URL that:
-	•	Accepts a base64-encoded invoice image
-	•	Calls Amazon Bedrock (Claude) to extract invoice data
-	•	Returns JSON with fields like place, date, and payment
+- Accepts a base64-encoded invoice image
+- Sends it to Amazon Bedrock (Claude) for extraction
+- Returns structured JSON fields, for example:
 
-For now (Step 1), you can:
-	•	Point the frontend to your own Lambda URL, or
-	•	Stub/mock the API endpoint during development
+```json
+{
+  "place": "Vendor Name",
+  "date": "2025-01-10",
+  "payment": 42.75,
+  "currency": "USD"
+}
+```
 
-Check the API call in the src directory (e.g. where fetch() or axios is used) and update the URL to match your deployed Lambda endpoint.
+In the frontend code, update the API endpoint to match your deployed Lambda URL.  
+If you use environment variables, create a `.env` file:
 
-⸻
+```env
+VITE_LAMBDA_URL=https://your-lambda-url.aws
+```
 
-🧹 Useful npm Scripts
+And in your code, reference:
 
-Common commands:
+```js
+const apiUrl = import.meta.env.VITE_LAMBDA_URL;
+```
 
-npm run dev      # Start dev server
-npm run build    # Build for production
-npm run preview  # Preview built app
+---
 
-(If you use pnpm or yarn, just swap npm with pnpm/yarn.)
+## NPM Script Reference
 
-⸻
+| Command           | Description                  |
+|-------------------|------------------------------|
+| `npm run dev`     | Run the development server   |
+| `npm run build`   | Build for production         |
+| `npm run preview` | Preview the production build |
 
-📺 Follow Along With the Tutorial
+(Replace `npm` with `pnpm` or `yarn` if you prefer.)
 
-This repo is part of the AWS Serverless Invoice Scanner YouTube series on the Scale-Up SaaS channel.
-Watch Step 1 to see how this frontend was built and how it will connect to AWS in the next steps.
+---
 
-⸻
+## YouTube Series
 
+This repository is part of the "AWS Serverless Invoice Scanner" YouTube series on the ScaleUp SaaS channel.
 
-If you tell me the exact env variable / file you’re using for the Lambda URL (e.g. `VITE_LAMBDA_URL` in `.env`), I can add a short “Environment Variables” section to this too.
+Step 1 covers building this frontend UI.  
+Future steps add:
+
+- AWS Lambda
+- Bedrock Claude extraction
+- S3 uploads
+- DynamoDB storage
+- Full end-to-end invoice parsing pipeline
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support 🙏😃
+  
+ If you Like the tutorial and you want to support my channel so I will keep releasing amzing content that will turn you to a desirable Developer with Amazing Cloud skills... I will realy appricite if you:
+ 
+ 1. Subscribe to My youtube channel and leave a comment: http://www.youtube.com/@ScaleUpSaaS?sub_confirmation=1
+ 2. Buy me A coffee ❤️ : https://www.buymeacoffee.com/scaleupsaas
+
+Thanks for your support :)
